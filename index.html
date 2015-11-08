@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>html5</title>
+</head>
+<body>
+
+<style type="text/css" id="J_css2">
+.c1{
+  float:left;
+  width:100px;
+  height:100px;
+  background:#ccc;
+} 
+.c2{float:right;}
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+</style>
+
+<style type="text/text" id="J_css">
+.c1{
+	float:left;
+	width:100px;
+	height:100px;
+	background:#ccc;
+}	
+.c2{float:right;}
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes bounceInLeft {
+  from, 60%, 75%, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-3000px, 0, 0);
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes bounceInLeft {
+  from, 60%, 75%, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-3000px, 0, 0);
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.bounceInLeft {
+  -webkit-animation-name: bounceInLeft;
+  animation-name: bounceInLeft;
+}
+
+
+
+</style>
+
+<div class="animated c1" data-animate-type="bounceInLeft"></div>
+	
+<script type="text/javascript">
+var getCssByClassName ={
+    main:function(className,animateState){
+      var strCss = J_css.innerHTML;
+      var temp1 = strCss.replace(/\s/g,'');
+      var arrCss=[];
+      arrCss.push(this.getMainCss(className,temp1));
+      if(animateState){
+        arrCss.push(this.getKeyframesCss(className,temp1));
+        arrCss.push(this.getWebkitKeyframesCss(className,temp1));
+      }
+      console.log(arrCss);
+      return arrCss.join("");
+    },
+    getMainCss:function(className,str){
+      var temp2 = str.match(new RegExp("\\."+className+"\\{[^\\}]+\\}", "ig"));
+      return temp2[0];
+    },
+    getKeyframesCss:function(className,str){
+      var temp3 = str.match(new RegExp("@keyframes"+className+"{"+"\\S+"+"}}", "ig"));
+      temp3 = temp3[0].replace('@keyframes','@keyframes ');
+      return temp3;
+    },
+    getWebkitKeyframesCss:function(className,str){
+      var temp2 = str.match(new RegExp("@-webkit-keyframes"+className+"{"+"\\S+"+"}}", "ig"));
+      temp2 = temp2[0].replace('@-webkit-keyframes','@-webkit-keyframes ');
+      return temp2;      
+    }
+}
+
+//
+var createCSSStyleSheet={
+    main:function(){
+        //getAttribute是dom的方法，工具运行在在服务端的nodejs,无法使用这个方法，要使用功能正则得到data-animate-type的值
+        var curDom = document.querySelector('.c1');
+        var curDomClass = curDom.getAttribute('data-animate-type');
+        var css = getCssByClassName.main(curDomClass,true);
+        J_css2.innerHTML+=css; 
+    }
+}
+createCSSStyleSheet.main();
+
+</script>
+
+</body>
+</html>

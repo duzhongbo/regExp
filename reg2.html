@@ -5,15 +5,22 @@
 <title>html5</title>
 </head>
 <body>
-	
-<div class="animated c1" data-animate-type="bounceInLeft"></div>
+
+<div class="wrap">
+	<div class="animated c1" data-animate-type="bounceInLeft"></div>
+	<div class="animated c1" data-animate-type="bounceInRight"></div>
+</div>
 
 
 <script type="text/javascript">
-var strHtml = document.querySelector('.c1').outerHTML;
-var temp1 = strHtml.match(new RegExp('data-animate-type="(\\S+)"','i'));
-console.log(strHtml,temp1,temp1[1]);
-
+var strHtml = document.querySelector('.wrap').innerHTML;
+var arrClass=[];
+// var re=/data-animate-type="(\\S+)"/ig;
+var re=new RegExp('data-animate-type="(\\S+)"','ig');
+while(match = re.exec(strHtml)){
+	arrClass.push(match[1]);
+}
+console.log(arrClass);
 
 
 </script>

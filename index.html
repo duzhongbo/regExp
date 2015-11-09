@@ -6,22 +6,7 @@
 </head>
 <body>
 
-<style type="text/css" id="J_css2">
-.c1{
-  float:left;
-  width:100px;
-  height:100px;
-  background:#ccc;
-} 
-.c2{float:right;}
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-</style>
+<style type="text/css" id="J_css2"></style>
 
 <style type="text/text" id="J_css">
 .c1{
@@ -148,15 +133,27 @@ var getCssByClassName ={
 
 //
 var createCSSStyleSheet={
-    main:function(){
+    main:function(arrClass){
         //getAttribute是dom的方法，工具运行在在服务端的nodejs,无法使用这个方法，要使用功能正则得到data-animate-type的值
-        var curDom = document.querySelector('.c1');
-        var curDomClass = curDom.getAttribute('data-animate-type');
-        var css = getCssByClassName.main(curDomClass,true);
-        J_css2.innerHTML+=css; 
+        var css,str='';
+        for(var i=0,len=arrClass.length;i<len;i++){
+          if(arrClass[i].indexOf('*')!=-1){
+            css = getCssByClassName.main(arrClass[i]);
+          }else{
+            css = getCssByClassName.main(arrClass[i],true);
+          }
+          str+=css;
+        }
+        J_css2.innerHTML=str; 
     }
 }
-createCSSStyleSheet.main();
+createCSSStyleSheet.main([
+'animated*','c1*','bounceInLeft'
+]);
+setTimeout(function(){
+  document.querySelector('.c1').className+=' bounceInLeft';
+},1000);
+
 
 </script>
 

@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	
 
-var re = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g;// 1、匹配000.000.000.000,\b和^的区别？
+var re = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g;// 1、匹配000.000.000.000,\b和^的区别？\b表示的单词边界，可以是开始，也可以是结尾
 
 var re = /Lincoln/;// 2、匹配字符串中单词"Lincoln"的第一个实例
 
@@ -48,6 +48,7 @@ var re = /[abc]/;// 18、匹配a,b或者c，/abc/匹配"abc"
 
 var re = /Java(Script)?/g;// 19、匹配Java或JavaScript
 
+var re = /\bscript\n/gi;// 20、
 </script>
 
 </body>
